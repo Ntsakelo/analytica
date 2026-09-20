@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar"
 import { useSearchParams, useParams } from "react-router";
 import { products } from "../data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 
 
@@ -19,17 +19,48 @@ export interface Cart {
 }
 
 const Product = () => {
+    const [productId, setProductId] = useState<any>()
+    let [product, setProduct] = useState<any>()
     const {addToCart} = useCart()
     const params = useParams();
     const category: Category | any = params.category
     const [searchParams] = useSearchParams();
-    const productId = searchParams.get('id');
+   useEffect(() => {
+    if(!productId){
+        setProductId(searchParams.get('id'));    
+
+    } 
+   },[])  
+   
+   useEffect(() => {
+    if(productId){
+        setProduct(categoryProds.filter((product: any) => product.id == Number(productId)));
+    }
+   },[productId])
     const categoryProds = products[category];
-    const product = categoryProds.filter((product: any) => product.id == Number(productId));
-    console.log(product)
     const [selectedSize, setSelectedSize] = useState('M');
     // Inside your component:
     const [qty, setQty] = useState(1);
+
+    useEffect(() => {
+        window.dataLayer = window.dataLayer || [];
+       if(product && product.length){
+           window.dataLayer.push({
+            event:'view_item',
+            ecommerce:{
+                currency:"ZAR",
+                value:product[0].price,
+                items:[{
+                    item_id:product[0].sku,
+                    item_name:product[0].item,
+                    price:product[0].price,
+                    quantity:1,
+                    item_variant:product[0].color
+                }]
+            }
+           })
+       } 
+    },[product]);
 
 
 
@@ -45,7 +76,7 @@ const Product = () => {
     return (
         <div>
             <Navbar />
-            {product.map((product: any) => (
+            {product && product.map((product: any) => (
                 <section key={product.id} className="mt-5 grid grid-cols-12 p-5 gap-6 mb-30">
                     <div className="h-50 col-span-5">
                         <img src={product.image} alt="" className="h-auto w-[70%] block m-auto" />

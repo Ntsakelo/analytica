@@ -4,6 +4,12 @@ import Products from './views/Products'
 import Product from './views/Product'
 import Cart from './views/Cart'
 
+declare global{
+  interface Window {
+    dataLayer: any[],
+  }
+}
+
 function App() {
 
 
