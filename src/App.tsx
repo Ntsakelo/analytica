@@ -2,7 +2,6 @@ import {Routes,Route} from 'react-router'
 import Home from './views/Home'
 import Products from './views/Products'
 import Product from './views/Product'
-import { CartProvider } from './context/CartContext'
 import Cart from './views/Cart'
 
 function App() {

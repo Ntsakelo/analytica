@@ -1,8 +1,6 @@
 import { Link } from "react-router";
 import { ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline'
 import Badge from '@mui/material/Badge';
-import type { Cart } from "../views/Product";
-import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 
 

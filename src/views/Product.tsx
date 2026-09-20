@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar"
-import { Link, useSearchParams, useParams } from "react-router";
+import { useSearchParams, useParams } from "react-router";
 import { products } from "../data";
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
@@ -28,7 +28,6 @@ const Product = () => {
     const product = categoryProds.filter((product: any) => product.id == Number(productId));
     console.log(product)
     const [selectedSize, setSelectedSize] = useState('M');
-    const cart: Cart[] = [];
     // Inside your component:
     const [qty, setQty] = useState(1);
 

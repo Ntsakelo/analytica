@@ -1,9 +1,6 @@
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
-import boys from '../assets/boys.jpg';
-import girls from '../assets/girls.jpg';
-import women from '../assets/women.jpg';
-import men from '../assets/men.jpg';
+
 
 
 const Home = () => {
